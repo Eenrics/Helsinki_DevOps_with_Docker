@@ -1,0 +1,6 @@
+root@60621-lb-01:/home/ubuntu# docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS                      PORTS     NAMES
+d3639da66e6a   nginx     "/docker-entrypoint.…"   About a minute ago   Exited (0) 30 seconds ago             affectionate_greider
+35c8c208b54e   nginx     "/docker-entrypoint.…"   About a minute ago   Exited (0) 30 seconds ago             nostalgic_jackson
+978ea4e27c3f   nginx     "/docker-entrypoint.…"   About a minute ago   Up About a minute           80/tcp    optimistic_mirzakhani
+root@60621-lb-01:/home/ubuntu#
