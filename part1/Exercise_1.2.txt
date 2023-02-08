@@ -1,0 +1,5 @@
+root@60621-lb-01:/home/ubuntu# docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@60621-lb-01:/home/ubuntu# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+root@60621-lb-01:/home/ubuntu#
