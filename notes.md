@@ -16,6 +16,7 @@
 |  `docker container ls -a`  |  Lists all containers  |  `docker ps -a`  |
 |  `docker container run <image>`  |  Runs a container from an image  |  `docker run <image>`  |
 |  `docker container run -d <image>`  |  Runs a container from an image in detached mode  |  `docker run -d <image>`  |
+|  `docker container run --rm <image>`  |  Remove it automatically after it has existed  |  `docker run --rm <image>`  |
 |  `docker container run -it <image>`  |  Runs a container from an image in interactive mode  |  `docker run -it <image>`  |
 |  `docker container run -p <host_port>:<container_port> <image>`  |  Publish port of the host to container  |  `docker run -p <host_port>:<container_port> <image>`  |
 |  `docker container run -v <file/dir_host>:<file/dir_container> <image>`  |  Bind mount volume from host to container  |  `docker run -v <file/dir_host>:<file/dir_container> <image>`  |
@@ -24,12 +25,15 @@
 |  `docker container rm <container> <container> <container>`  |  Removes multiple containers  |  `docker rm <container> <container> <container>`  |
 |  `docker container stop <container>`  |  Stops a container  |  `docker stop <container>`  |
 |  `docker container exec <container> <command>`  |  Executes a command inside the container  |  	`docker exec <container> <command>`  |
-|  `docker container prune`  |  Deletes all containers  |  	`docker container prune`  |
+|  `docker container prune`  |  Deletes all containers  |  	`docker prune`  |
+|  `docker image prune`  |  Deletes dangling images (with no name and unused)  |  	`docker image prune`  |
+|  `docker system prune`  |  to clean almost everything  |  	`docker system prune`  |
 |  `docker container logs -f <container>`  |  to follow the output of logs of a running container  |  	`docker logs -f <container>`  |
 |  `docker container pause <container>`  |  to pause a container without exiting or stoping it  |  `docker pause <container>`  |
 |  `docker container unpause <container>`  |  to unpause a paused container  |  `docker unpause <container>`  |
 |  `docker container attach <container>`  |  to attach to a running container  |  `docker attach <container>`  |
 |  `docker container attach --no-stdin <container>`  |  to attach to a running container with no cmd directed to the container  |  `docker attach --no-stdin <container>`  |
+|  `Ctr+p Ctr+q`  |  to detach from stdout  |  `Ctr+p Ctr+q`  |
 |  `docker container exec -it <container> bash`  |  to enter a container with new process(new terminal).  |  `docker exec -it <container> bash`  |
 |  `docker container kill <container>`  |  to kill a container after grace period.  |  `docker kill <container>`  |
 |  `docker search <image>`  |  to search for images in the Docker Hub.  |  `docker search <image>`  |
