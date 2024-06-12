@@ -13,6 +13,7 @@
 |  `docker image ls`  |  Lists all images  |  `docker images`  |
 |  `docker image rm <image>`  |  Removes an image  |  `docker rmi <image>`  |
 |  `docker image pull <image>`  |  Pulls image from a docker registry  |  `docker pull <image>`  |
+|  `docker image pull <registry>/<repository>/<image>`  |  Pulls image from a other registry  |  `docker pull <registry>/<repository>/<image>`  |
 |  `docker container ls -a`  |  Lists all containers  |  `docker ps -a`  |
 |  `docker container run <image>`  |  Runs a container from an image  |  `docker run <image>`  |
 |  `docker container run -d <image>`  |  Runs a container from an image in detached mode  |  `docker run -d <image>`  |
@@ -37,10 +38,13 @@
 |  `docker container exec -it <container> bash`  |  to enter a container with new process(new terminal).  |  `docker exec -it <container> bash`  |
 |  `docker container kill <container>`  |  to kill a container after grace period.  |  `docker kill <container>`  |
 |  `docker search <image>`  |  to search for images in the Docker Hub.  |  `docker search <image>`  |
+|  `docker search <registry>/<image>`  |  to search for images in the other registry.  |  `docker search <registry>/<image>`  |
 |  `docker container diff <container>`  |  to see the difference between container and the image it is made from.  |  `docker diff <container>`  |
 |  `docker commit <container> <new_image>`  |  to create new image from container with the changes made in the container.  |  `docker commit <container> <new_image>`  |
 |  `docker container cp <file> <container>:<path>`  |  to copy a file from host to container or vice versa.  |  eg. `docker container cp ./index.js hello-node:/usr/src/app/index.js` |
 |  `docker compose -f <docker-compose.yml> up -d`  |  to specify custom docker compose yaml file.  |  eg. `docker compose -f docker-compose.dev.yml up -d` |
+|  `docker tag <image>:<tag> <image>:<local_tag>`  |  to tag images locally. (creates the tag <image>:<local_tag> which refers to <image>:<tag>)  |  eg. `docker tag <image>:<tag> <image>:<local_tag>` |
+|  `docker tag <image>:<tag> <new_image>:<new_tag>`  |  to rename images  |  eg. `docker tag <image>:<tag> <new_image>:<new_tag>` |
 > For all of them container can be either the container id or the container name. Same for images
 ##
 > If we pressed `Ctrl + c` in the attached container, the container will stop. If we want to attach to a container while making sure we don't close it from the other terminal we can specify to not attach STDIN with `--no-stdin` option. Or we can detach from attached container by hitting `Ctrl + p`, `Ctrl + q` to detach us from the STDOUT.
