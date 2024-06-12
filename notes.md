@@ -73,6 +73,7 @@ docker run -d --rm -it --name looper-it ubuntu sh -c 'while true; do date; sleep
 ```bash
 dr show docker0 | grep -Po 'inet \K[\d.]+'dr show docker0 | grep -Po 'inet \K[\d.]+'
 ```
+-  Usually like the following: `registry/organisation/image:tag`. But may be as short as `ubuntu`, then the registry will default to `Docker hub`, `organisation` to `library` and `tag` to `latest`. The organisation may also be a `user`, but calling it an organisation may be more clear.
 		
 		
 		
