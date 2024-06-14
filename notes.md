@@ -21,7 +21,7 @@
 |  `docker container run --rm <image>`  |  Remove it automatically after it has existed  |  `docker run --rm <image>`  |
 |  `docker container run -it <image>`  |  Runs a container from an image in interactive mode  |  `docker run -it <image>`  |
 |  `docker container run -p <host_port>:<container_port> <image>`  |  Publish port of the host to container  |  `docker run -p <host_port>:<container_port> <image>`  |
-|  `docker container run -v <file/dir_host>:<file/dir_container> <image>`  |  Bind mount volume from host to container  |  `docker run -v <file/dir_host>:<file/dir_container> <image>`  |
+|  `docker container run -v <file/dir_host>:<file/dir_container> <image>`  |  Bind mount volume from host to container (path must be absolute)  |  `docker run -v <file/dir_host>:<file/dir_container> <image>`  |
 |  `docker container run --name <container> <image>`  |  To give a name for the new container to be created  |  `docker run --name <container> <image>`  |
 |  `docker container rm <container>`  |  Removes a container  |  `docker rm <container>`  |
 |  `docker container rm <container> <container> <container>`  |  Removes multiple containers  |  `docker rm <container> <container> <container>`  |
@@ -108,3 +108,5 @@ $ docker diff zen_rosalind
 ```
 docker cp "determined_elion://mydir/Welcome to Kumpula campus! ｜ University of Helsinki [DptFY_MszQs].mp4" .
 ```
+
+- If we wish to create a volume with only a single file we could also do that by pointing to it. For example -v "$(pwd)/material.md:/mydir/material.md" this way we could edit the material.md locally and have it change in the container (and vice versa). Note also that -v creates a directory if the file does not exist.
