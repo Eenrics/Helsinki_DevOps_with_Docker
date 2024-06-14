@@ -89,4 +89,13 @@ $ docker diff zen_rosalind
   ```
   - `A = added, D = deleted, C = changed.`
 
-  - if a image has `ENTRYPOINT` defined, `CMD` is used to define it the default arguments. `ENTRYPOINT` vs `CMD` can be confusing - in a properly set up image, the __command__ represents an argument list for the __entrypoint__. By default, the __entrypoint__ in Docker is set as `/bin/sh -c` and this is passed if no entrypoint is set. This is why giving the path to a script file as `CMD` works: you're giving the file as a parameter to `/bin/sh -c`.
+  - if a image has `ENTRYPOINT` defined, `CMD` is used to define it the default arguments. `ENTRYPOINT` vs `CMD` can be confusing - in a properly set up image, the __command__ represents an argument list for the __entrypoint__. By default, the __entrypoint__ in Docker is set as `/bin/sh -c` and this is passed if no entrypoint is set. This is why giving the path to a script file as `CMD` works: you're giving the file as a parameter to `/bin/sh -c`. If an image defines both, then the `CMD` is used to give default arguments to the __entrypoint__.
+
+  - There are two ways to set the `ENTRYPOINT` and `CMD`: `exec form` and `shell form`. We've been using the exec form where the command itself is executed. In shell form the command that is executed is wrapped with `/bin/sh -c` - it's useful when you need to evaluate environment variables in the command like `$MYSQL_PASSWORD` or similar.
+
+|    __Dockerfile__             |       __Resulting command__        |
+| ------------- | ------------- |
+|`ENTRYPOINT` /bin/ping -c 3 `CMD` localhost  |  /bin/sh -c '/bin/ping -c 3' /bin/sh -c localhost  |
+|`ENTRYPOINT`  ["/bin/ping","-c","3"] `CMD` localhost  |  /bin/ping -c 3 /bin/sh -c localhost  |
+|`ENTRYPOINT`  /bin/ping -c 3 `CMD`  ["localhost"]  |  /bin/sh -c '/bin/ping -c 3' localhost  |
+|`ENTRYPOINT` ["/bin/ping","-c","3"] `CMD`  ["localhost"]  |  /bin/ping -c 3 localhost  |
