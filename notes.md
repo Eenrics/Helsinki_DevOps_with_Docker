@@ -99,3 +99,5 @@ $ docker diff zen_rosalind
 |`ENTRYPOINT`  ["/bin/ping","-c","3"] `CMD` localhost  |  /bin/ping -c 3 /bin/sh -c localhost  |
 |`ENTRYPOINT`  /bin/ping -c 3 `CMD`  ["localhost"]  |  /bin/sh -c '/bin/ping -c 3' localhost  |
 |`ENTRYPOINT` ["/bin/ping","-c","3"] `CMD`  ["localhost"]  |  /bin/ping -c 3 localhost  |
+
+- Most of the time we can ignore `ENTRYPOINT` when building our images and only use `CMD`. For example, Ubuntu image defaults the `ENTRYPOINT` to bash so we do not have to worry about it. And it gives us the convenience of allowing us to overwrite the `CMD` easily, for example, with bash to go inside the container.
