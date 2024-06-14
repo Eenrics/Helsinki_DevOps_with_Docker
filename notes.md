@@ -15,6 +15,7 @@
 |  `docker image pull <image>`  |  Pulls image from a docker registry  |  `docker pull <image>`  |
 |  `docker image pull <registry>/<repository>/<image>`  |  Pulls image from a other registry  |  `docker pull <registry>/<repository>/<image>`  |
 |  `docker container ls -a`  |  Lists all containers  |  `docker ps -a`  |
+|  `docker container ls -a --last 3`  |  Lists the last three containers  |  `docker ps -a --last 3`  |
 |  `docker container run <image>`  |  Runs a container from an image  |  `docker run <image>`  |
 |  `docker container run -d <image>`  |  Runs a container from an image in detached mode  |  `docker run -d <image>`  |
 |  `docker container run --rm <image>`  |  Remove it automatically after it has existed  |  `docker run --rm <image>`  |
@@ -47,6 +48,7 @@
 |  `docker tag <image>:<tag> <new_image>:<new_tag>`  |  to rename images  |  eg. `docker tag <image>:<tag> <new_image>:<new_tag>` |
 |  `docker build . -t <name>`  |  to build image in current directory with name  |  eg. `docker build . -t <name>` |
 |  `docker cp ./<file_name> <container_name_or_id>:<container_path>`  |  to copy file to docker container  |  eg. `docker cp ./<file_name> <container_name_or_id>:<container_path>` |
+|  `docker cp "<container_id_or_name>://<path_to_file_in_container>" .`  |  to copy file from docker container  |  eg. `docker cp "<container_id_or_name>://<path_to_file_in_container>" .` |
 |  `docker diff <container_name_or_id>`  |  to check for change in the container  |  eg. `docker diff <container_name_or_id>` |
 > For all of them container can be either the container id or the container name. Same for images
 ##
@@ -101,3 +103,8 @@ $ docker diff zen_rosalind
 |`ENTRYPOINT` ["/bin/ping","-c","3"] `CMD`  ["localhost"]  |  /bin/ping -c 3 localhost  |
 
 - Most of the time we can ignore `ENTRYPOINT` when building our images and only use `CMD`. For example, Ubuntu image defaults the `ENTRYPOINT` to bash so we do not have to worry about it. And it gives us the convenience of allowing us to overwrite the `CMD` easily, for example, with bash to go inside the container.
+
+- We should use quote if the file name has space in it. eg.
+```
+docker cp "determined_elion://mydir/Welcome to Kumpula campus! ｜ University of Helsinki [DptFY_MszQs].mp4" .
+```
