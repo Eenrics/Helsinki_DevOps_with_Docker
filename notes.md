@@ -89,4 +89,4 @@ $ docker diff zen_rosalind
   ```
   - `A = added, D = deleted, C = changed.`
 
-  - if a image has `ENTRYPOINT` defined, `CMD` is used to define it the default arguments.
+  - if a image has `ENTRYPOINT` defined, `CMD` is used to define it the default arguments. `ENTRYPOINT` vs `CMD` can be confusing - in a properly set up image, the __command__ represents an argument list for the __entrypoint__. By default, the __entrypoint__ in Docker is set as `/bin/sh -c` and this is passed if no entrypoint is set. This is why giving the path to a script file as `CMD` works: you're giving the file as a parameter to `/bin/sh -c`.
