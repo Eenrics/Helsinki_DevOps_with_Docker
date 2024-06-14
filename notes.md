@@ -40,11 +40,14 @@
 |  `docker search <image>`  |  to search for images in the Docker Hub.  |  `docker search <image>`  |
 |  `docker search <registry>/<image>`  |  to search for images in the other registry.  |  `docker search <registry>/<image>`  |
 |  `docker container diff <container>`  |  to see the difference between container and the image it is made from.  |  `docker diff <container>`  |
-|  `docker commit <container> <new_image>`  |  to create new image from container with the changes made in the container.  |  `docker commit <container> <new_image>`  |
+|  `docker commit <container> <new_image>`  |  to create new image from container with the changes made in the container. (docker commit adds a new layer on top of the image)  |  `docker commit <container> <new_image>`  |
 |  `docker container cp <file> <container>:<path>`  |  to copy a file from host to container or vice versa.  |  eg. `docker container cp ./index.js hello-node:/usr/src/app/index.js` |
 |  `docker compose -f <docker-compose.yml> up -d`  |  to specify custom docker compose yaml file.  |  eg. `docker compose -f docker-compose.dev.yml up -d` |
 |  `docker tag <image>:<tag> <image>:<local_tag>`  |  to tag images locally. (creates the tag <image>:<local_tag> which refers to <image>:<tag>)  |  eg. `docker tag <image>:<tag> <image>:<local_tag>` |
 |  `docker tag <image>:<tag> <new_image>:<new_tag>`  |  to rename images  |  eg. `docker tag <image>:<tag> <new_image>:<new_tag>` |
+|  `docker build . -t <name>`  |  to build image in current directory with name  |  eg. `docker build . -t <name>` |
+|  `docker cp ./<file_name> <container_name_or_id>:<container_path>`  |  to copy file to docker container  |  eg. `docker cp ./<file_name> <container_name_or_id>:<container_path>` |
+|  `docker diff <container_name_or_id>`  |  to check for change in the container  |  eg. `docker diff <container_name_or_id>` |
 > For all of them container can be either the container id or the container name. Same for images
 ##
 > If we pressed `Ctrl + c` in the attached container, the container will stop. If we want to attach to a container while making sure we don't close it from the other terminal we can specify to not attach STDIN with `--no-stdin` option. Or we can detach from attached container by hitting `Ctrl + p`, `Ctrl + q` to detach us from the STDOUT.
@@ -74,10 +77,16 @@ docker run -d --rm -it --name looper-it ubuntu sh -c 'while true; do date; sleep
 dr show docker0 | grep -Po 'inet \K[\d.]+'dr show docker0 | grep -Po 'inet \K[\d.]+'
 ```
 -  Usually like the following: `registry/organisation/image:tag`. But may be as short as `ubuntu`, then the registry will default to `Docker hub`, `organisation` to `library` and `tag` to `latest`. The organisation may also be a `user`, but calling it an organisation may be more clear.
-		
-		
-		
-		
-		
-		
-	 
+- `docker run -it hello-docker sh` in this script we replaced the CMD of the dockerfile with `sh` and used `-i` and `-t` to start the container so that we can interact with it.
+```bash
+$ docker diff zen_rosalind
+  C /usr
+  C /usr/src
+  C /usr/src/app
+  A /usr/src/app/additional.txt
+  C /root
+  A /root/.ash_history
+  ```
+  - `A = added, D = deleted, C = changed.`
+
+  - if a image has `ENTRYPOINT` defined, `CMD` is used to define it the default arguments.
