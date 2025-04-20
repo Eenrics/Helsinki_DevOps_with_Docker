@@ -140,3 +140,46 @@ docker run -p 4567 app-in-port
 ```
 
 - We could also limit connections to a certain protocol only, e.g. UDP by adding the protocol at the end: `EXPOSE <port>/udp` and `-p <host-port>:<container-port>/udp`. we can also define the host-side port like this `-p 127.0.0.1:3456:3000`. This will only allow requests from your computer through port `3456` to the application port `3000`, with no outside access allowed.
+
+- In Docker, both ENTRYPOINT and CMD define what runs when your container starts. The "exec form" and "shell form" are just two different ways of writing that command.
+  - Exec Form (Recommended for most cases) This is written as a JSON array:
+    ```docker
+    ENTRYPOINT ["echo", "Hello"]
+    ```
+    Docker runs it directly, like:
+    ```shell
+    exec echo Hello
+    ```
+    No shell involved, so things like shell built-ins (`&&`, `$VAR`, `*`, etc.) won’t work directly.
+  - Shell Form This is written like a plain shell command:
+    ```docker
+    ENTRYPOINT echo "Hello"
+    ```
+    Docker wraps it like this:
+    ```shell
+    /bin/sh -c 'echo "Hello"'
+    ```
+    So now it goes through a shell, meaning things like $ENV_VARIABLE, &&, pipes, etc., do work.
+
+| Dockerfile                                           | Resulting command                                |
+| ---------------------------------------------------- | ------------------------------------------------ |
+| ENTRYPOINT /bin/ping -c 3, CMD localhost             | /bin/sh -c '/bin/ping -c 3' /bin/sh -c localhost |
+| ENTRYPOINT ["/bin/ping","-c","3"], CMD localhost     | /bin/ping -c 3 /bin/sh -c localhost              |
+| ENTRYPOINT /bin/ping -c 3, CMD ["localhost"]         | /bin/sh -c '/bin/ping -c 3' localhost            |
+| ENTRYPOINT ["/bin/ping","-c","3"], CMD ["localhost"] | /bin/ping -c 3 localhost                         |
+
+> We should use quotes if the file name has spaces when docker copying files
+
+```shell
+$ docker cp "determined_elion://mydir/Welcome to Kumpula campus! ｜ University of Helsinki [DptFY_MszQs].mp4" .
+```
+
+> Overriding entrypoint and cmd
+
+```shell
+# Override CMD
+docker run <image> <new_command> [args...]
+
+# Override ENTRYPOINT
+docker run --entrypoint <new_entrypoint> <image> [args...]
+```
