@@ -1,1 +1,1 @@
- docker run -it --name exe1.4 ubuntu sh -c '(apt update -y; apt upgrade -y; apt install curl -y) && (echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;)'
+ docker run -it --name exe1.4 ubuntu sh -c '(apt update -y; apt upgrade -y; apt install curl -y) && (while true; do echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website; done)'
