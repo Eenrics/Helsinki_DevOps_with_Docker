@@ -139,7 +139,7 @@ docker cp "determined_elion://mydir/Welcome to Kumpula campus! ｜ University of
 docker run -p 4567 app-in-port
 ```
 
-- We could also limit connections to a certain protocol only, e.g. UDP by adding the protocol at the end: `EXPOSE <port>/udp` and `-p <host-port>:<container-port>/udp`. we can also define the host-side port like this `-p 127.0.0.1:3456:3000`. This will only allow requests from your computer through port `3456` to the application port `3000`, with no outside access allowed.
+- We could also limit connections to a certain protocol only, e.g. UDP by adding the protocol at the end: `EXPOSE <port>/udp` and `-p <host-port>:<container-port>/udp`. we can also define the host-side port like this `-p 127.0.0.1:3456:3000`. This will only allow requests from your computer through port `3456` to the application port `3000`, with no outside access allowed. The short syntax, `-p 3456:3000`, will result in the same as -p `0.0.0.0:3456:3000`, which truly is opening the port to everyone.
 
 - In Docker, both ENTRYPOINT and CMD define what runs when your container starts. The "exec form" and "shell form" are just two different ways of writing that command.
   - Exec Form (Recommended for most cases) This is written as a JSON array:
