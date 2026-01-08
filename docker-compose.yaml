@@ -1,0 +1,9 @@
+services:
+  yt-dlp-ubuntu:
+    image: accentut/yt-dlp
+    build: .
+    # develop:
+    #   watch:
+    #     - path: .
+    #       action: sync
+    #       target: /app
