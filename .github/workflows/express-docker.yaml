@@ -1,4 +1,4 @@
-name: Build and Push Express App Docker Image
+name: Build, Push And Deploy Express App Docker Image
 
 on:
   push:
@@ -25,3 +25,12 @@ jobs:
         context: ./projects/express-app
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/helsinki-do-express-app:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: JorgeLNJunior/render-deploy@v1.4.7
+        with:
+          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+          api_key: ${{ secrets.RENDER_API_KEY }}
+          wait_deploy: true
