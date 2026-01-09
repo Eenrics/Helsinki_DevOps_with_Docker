@@ -27,9 +27,11 @@ jobs:
         tags: ${{ secrets.DOCKER_USERNAME }}/helsinki-do-express-app:latest
 
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: JorgeLNJunior/render-deploy@v1.4.7
+      - name: Deploy to Render via Action
+        uses: JorgeLNJunior/render-deploy@v1.4.7
         with:
           service_id: ${{ secrets.RENDER_SERVICE_ID }}
           api_key: ${{ secrets.RENDER_API_KEY }}
