@@ -1,0 +1,20 @@
+services:
+  db:
+    image: backend-image
+    networks:
+      - database-network
+
+networks:
+  database-network:
+    external:
+      name: database-network # Must match the actual name of the network
+
+# By default all services are added to a network called 'default'
+# services:
+#   db:
+#     image: backend-image
+
+# networks:
+#   default:
+#     external:
+#       name: database-network # Must match the actual name of the network
